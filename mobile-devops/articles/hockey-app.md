@@ -3,6 +3,7 @@
 - [Fast Track for Azure - Mobile DevOps - HockeyApp](#fast-track-for-azure---mobile-devops---hockeyapp)
   * [Introduction](#introduction)
   * [Pre-Requisites](#pre-requisites)
+  * [Introductory Remarks](#introductory-remarks)
   * [Signing Your Build](#signing-your-build)
   * [Create a new Application in HockeyApp](#create-a-new-application-in-hockeyapp)
   * [Add update distribution](#add-update-distribution)
@@ -28,6 +29,13 @@ The main focus of this guide is to display HockeyApp as part of a DevOps pipelin
 * You should have first completed the [Xamarin Test Cloud](xamarin-test-cloud.md) section. 
     > If you have not completed the Xamarin Test Cloud section, download the [CreditCardValidatior.Droid.Zip file](https://github.com/xamarin/test-cloud-samples/raw/master/Quickstarts/downloads/CreditCardValidator.Droid.zip).
 * You will require Visual Studio to add the HockeyApp nuget package to the project.
+* The Java SDK is required to create a keystore for signing an Android app
+* [OpenSSL](http://gnuwin32.sourceforge.net/packages/openssl.htm) binaries will be required for encrypting the app signing keys
+
+## Introductory Remarks
+While Xamarin test cloud does not require an application to be signed to be tested, HockeyApp will require it to be so in order to install on a device. Without a signature on your app, you may see errors in HockeyApp that refer to the package being corrupted.
+
+In addition, if you want to try builds out from Xamarin, it is important that they be tested on a real device. Unfortunately the available emulators (neither the official Android ones nor the ones available with [Visual Studio](https://www.visualstudio.com/vs/msft-android-emulator/)) will not be able to download and install the binary packages.
 
 ## Signing Your Build
 To deploy your application through HockeyApp, you should sign your built packages in accordance with requirements of the target platform. More information about application requirements are available in the [app management](https://support.hockeyapp.net/kb/app-management-2/how-to-create-a-new-version) documentation.
@@ -50,6 +58,8 @@ In this example, we are going to create a keystore / alias combination to use fo
 
     ![Screenshot](media/hockey-app/vsts-ha-22.png)
 
+4. Repeat this step to enter keys needed for the keystore and alias keys we will be using in the next step. For the sake of this walkthrough, we will assume the name are *KeystoreKey* and *AliasKey*
+
 4. (Requires Java SDK) On your computer, we will now create the keystore / alias combination. Open a command prompt and type the following command:
 
     ```
@@ -65,6 +75,7 @@ In this example, we are going to create a keystore / alias combination to use fo
     ```
 
     When prompted, provide the key that was stored in Key Vault earlier.
+    > Note: In order for VSTS to decrypt the file later, the same version of OpenSSL must be used to encrypt the file. VSTS currently uses OpenSSL v.0.9.8h 28 May 2008. This is the same one that is available at the link above.
 6. Open the CreditCardValidator.Droid solution in Visual Studio. In the CreditCardValidator.Droid project, create a new folder called **Build**. Add the androidsigning.keystore.enc to the folder so it can be included with your build.
 7. In VSTS, edit your build definition. Add an Azure Key Vault task before the Sign APK task.
 
@@ -75,6 +86,9 @@ In this example, we are going to create a keystore / alias combination to use fo
     ![Screenshot](media/hockey-app/vsts-ha-24.png)
 
     If you do not have an Azure subscription linked, click **Manage** to create a new Azure Resource Manager connection. You will need to keep track of the Service Principal Name that is created by this process.
+
+9. Repeat the previous 2 steps twice more to get the keys for the keystore and the alias that we created earlier.
+
 9. In VSTS, add a Decrypt File (OpenSSL) task after the Key Vault step.
 
     ![Screenshot](media/hockey-app/vsts-ha-25.png)
@@ -83,7 +97,7 @@ In this example, we are going to create a keystore / alias combination to use fo
 
     ![Screenshot](media/hockey-app/vsts-ha-26.png)
 
-11. Update the Sign and Align APK task to use the decrypted keystore file. In this case, we are using secret environment variables in VSTS, however these values can be stored in Key Vault as well.
+11. Update the Sign and Align APK task to use the decrypted keystore file as well as the keystore and alias keys retrieved from Key Vault.
 
     ![Screenshot](media/hockey-app/vsts-ha-27.png)
 
@@ -96,6 +110,8 @@ In this example, we are going to create a keystore / alias combination to use fo
 13. Select the Service Principal and in the **Secret permissions** area grant it **Get** and **List** permissions, then click Ok.
 
     ![Screenshot](media/hockey-app/vsts-ha-30.png)
+
+    > Note: Make sure to **Save** your changes after you have added the Service Principal.
 
 14. The build process should now be able to grab secrets from Key Vault, decrypt the keystore file, sign the APK, and then publish it for release.
 
@@ -370,7 +386,7 @@ We have now published a build to our users for testing and feedback. Once we col
 ### Updating version information for Android
 Version information for Android apps is stored in the AndroidManifest.xml file. In particular you want to look at **versionCode** and **versionName** attributes. **versionCode** is an internal number that increases each time there is a new version available while **versionName** is a display value that is represented to your users. More information about versioning is available in the [Android documentation](https://developer.android.com/studio/publish/versioning.html).
 
-In this sample we will modify our build process to increment the versionCode on each new build and update versionName to take the name of our build number from VSTS.
+In this sample we will modify our build process to set versionCode to a unique, increasing value (such as the current date) and update versionName to take the name of our build number from VSTS.
 1. If you have not already completed the code signing process above, in the CreditCardValidation.Droid project, create a new folder called **Build**.
 2. Add a new PowerShell file called **UpdateAndroidVersions.ps1**
     * Add the following code to the PowerShell file
@@ -384,8 +400,7 @@ In this sample we will modify our build process to increment the versionCode on 
             {
                 $xml = [xml](Get-Content $file);
                 $node = $xml.manifest;
-                $versionCode = [int]$node.GetAttribute("android:versionCode");
-                $versionCode += 1;
+                $versionCode = [int]((Get-Date).ToUniversalTime().ToString("yyMMddHHmm"));
                 $node.SetAttribute("android:versionCode", $versionCode);
                 $node.SetAttribute("android:versionName", $Env:BUILD_BUILDNUMBER);
                 $xml.Save($file);

@@ -203,10 +203,13 @@ In this example, we are going to create a keystore / alias combination to use fo
         * **API Token:** Enter the API Token that you had set aside earlier
         * **App ID:** Enter the App ID that you had set aside earlier
 
-12. Open the mobile app on your Android Emulator. Once the latest build has been pushed to HockeyApp, you should notice a popup prompt when you next load the mobile app.
+12. In the HockeyApp portal, you will notice that there is a new version of the application in the portal. 
+    * If you have an Android device, you can login to HockeyApp from the device and download the application. 
+
+    > Note: If you have successfully configured the CheckForUpdates method, you will notice a popup prompt notifying that a new version is available when you next load the app on a device or emulator.
 
 ## Add Crash Analytics to your Application
-1. Open the **MainActivity.cs** file in **CreditCardValidator.Droid**
+1. Using Visual Studio, Open the **MainActivity.cs** file in the **CreditCardValidator.Droid** project.
 2. Add the following line at the top of your **MainActivity.cs** file:
 
     ```csharp
@@ -234,7 +237,10 @@ In this example, we are going to create a keystore / alias combination to use fo
 
 8. If you have not yet configured automatic release once the build is complete, then manually trigger a release of the mobile app.
 
-9. Once the release is complete, open the Mobile App on your android emulator. You should be prompted to update the application.
+9. Follow the appropriate step below;
+    * If you have an Android device, open the Mobile App on your device. You should be prompted to update the application.
+
+    * If you do not have an Android device, build the application from your Visual Studio Client onto a local emulator.
 
 10. Enter a valid Credit Card Number (16 digits long), and allow the app to crash.
 
@@ -268,7 +274,9 @@ In this example, we are going to create a keystore / alias combination to use fo
 
 5. If you have not yet configured automatic release once the build is complete, then manually trigger a release of the mobile app.
 
-6. Open the application and perform some basic user testing.
+6. Follow the appropriate step below;
+    * If you have an Android device, open the Mobile App on your device. You should be prompted to update the application. Open the application and perform some basic user testing.
+    * If you do not have an Android device, build the application from your Visual Studio Client onto a local emulator. Open the application and perform some basic user testing.
 
 7. Navigate to your application in your [HockeyApp Dashboard](https://rink.hockeyapp.net/manage/dashboard). Scroll down to the **User Metrics section**. You should start seeing data about your User Engagement and number of sessions from those users.
 
@@ -305,7 +313,9 @@ In this example, we are going to create a keystore / alias combination to use fo
     }
     ```
    
-5. Open the application and perform some basic user testing.
+5. Follow the appropriate step below;
+    * If you have an Android device, open the Mobile App on your device. You should be prompted to update the application. Open the application and perform a valid credit card submission.
+    * If you do not have an Android device, build the application from your Visual Studio Client onto a local emulator. Open the application and perform a valid credit card submission.
 
 6. Navigate to your application in your [HockeyApp Dashboard](https://rink.hockeyapp.net/manage/dashboard) and select the **Events** tab. You will notice telemetry appearing with respect to the custom events configured.
 

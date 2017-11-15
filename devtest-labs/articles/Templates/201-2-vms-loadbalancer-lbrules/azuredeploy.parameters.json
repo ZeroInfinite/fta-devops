@@ -2,17 +2,17 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "storageAccountName": {
-        "value": "GEN-UNIQUE"
+      "uniqueDnsName": {
+        "value": "ftadevdeptm"
+      },
+      "uniqueDnsNameForPublicIP": {
+        "value": "ftadevdepip"
       },
       "adminUsername": {
-        "value": "admin123"
+        "value": "Username"
       },
       "adminPassword": {
-        "value": "Admin123_!"
-      },
-      "dnsNameforLBIP": {
-        "value": "GEN-UNIQUE"
+        "value": "P@$$w0rd!"
       }
     }
   }

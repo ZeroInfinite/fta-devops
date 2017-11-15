@@ -194,17 +194,29 @@ As you walk through these guides, consider the three personas that use a DevTest
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-22.png)
 
 7. Complete the details of the form to allow a Git repository to act as a source of Artifacts and Templates for your DevTest Lab.
-    * Follow the **Creating a token** section of [this guide](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token) if you need to create a Personal Access Token for **GitHub**.
-    * Alternatively, follow the [Authenticate access with personal access tokens for VSTS and TFS](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate) documentation if you plan to use **Visual Studio Team Services**.
-    > Be careful with the folder path to your Artifact or Template directories. For example, you can see that /Artifacts/ is correct, whereas /master/Tree/Artifacts/ would not be correct.
+    * Set **Git Clone URI** to https://github.com/Azure/fta-devops.git
+    * Set **Branch** to master
+    * Set **Artifact folder path** to /devtest-labs/articles/Artifacts/
+    * Set **Azure Resource Manager template folder path** to /devtest-labs/articles/Templates/
+
+    * To create a **Personal Access Token** 
+        * For GitHub - Follow the **Creating a token** section of [this guide](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token) if you need to create a Personal Access Token for **GitHub**.
+
+        * For VSTS - follow the [Authenticate access with personal access tokens for VSTS and TFS](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate) documentation if you plan to use **Visual Studio Team Services**.
+    > Be careful with the folder path to your Artifact or Template directories. For example, you can see that /devtest-labs/articles/Artifacts/ is correct, whereas /master/Tree//devtest-labs/articles/Artifacts/ would not be correct.
 
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-23.png)
 
 8. Submit the form once you have entered your Personal Access Token. An attempt will be made to connect to the repository using the provided details.
 
-    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-24.png)
-
 9. Navigate to the Overview section of your DevTest Lab.
+    * Click **Add** at the top of the page, to create an environment, VMs based from allowed marketplace images or VMs based from custom images.
+    * Select one of the environments available, for example **Azure Traffic Manager VM example**. Enter the appropriate parameters on the resulting blade.
+    
+        > Be careful when entering parameters into the form. In particular, ensure that your parameters are appropriate. For example, use appropriate characters for resource names that will be used inside of a domain name.
+    * Create the environment.
+
+10. Navigate to the Overview section of your DevTest Lab.
     * Click **Add** at the top of the page, to create an environment, VMs based from allowed marketplace images or VMs based from custom images.
     * Select the formula that you had created earlier.
     * Provide a suitable Virtual Machine name.
@@ -213,18 +225,18 @@ As you walk through these guides, consider the three personas that use a DevTest
 
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-25.png)
 
-10. From the Overview section of your DevTest Lab, click **Add** at the top of the page, to create a Virtual Machine based on an allowed marketplace image.
+11. From the Overview section of your DevTest Lab, click **Add** at the top of the page, to create a Virtual Machine based on an allowed marketplace image.
     * Select a Windows based image.
     * Use the password that you have stored in **My Secrets**.
     * Add the **Azure PowerShell**, **Docker**, **Git** and **Visual Studio Code** artifacts to the machine.
 
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-26.png)
 
-11. Your Virtual Machine will then be provisioned. After a short period of time, click on your Windows-based Virtual Machine in **My Machines**.
+12. Your Virtual Machine will then be provisioned. After a short period of time, click on your Windows-based Virtual Machine in **My Machines**.
 
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-27.png)
 
-12. Click **Create custom image** on your Virtual Machine blade. (associated documentation [here](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-create-custom-image-from-vm-using-portal)). 
+13. Click **Create custom image** on your Virtual Machine blade. (associated documentation [here](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-create-custom-image-from-vm-using-portal)). 
     > You will also notice that there are a number of options to create custom images based on existing VHD images.
 
     * Enter a representative name and description for your image. This name will be presented in the view when any DevTest labs user creates a new Virtual Machine.

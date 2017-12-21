@@ -9,6 +9,7 @@
   * [Configure Test](#configure-test)
   * [Configure Distribution](#configure-distribution)
   * [Analytics and Telemetry](#analytics-and-telemetry)
+  * [Additional Capabilities](#additional-capabilities)
   * [References](#references)
 
 ## Introduction
@@ -96,8 +97,34 @@ The main focus of this guide is to leverage Microsoft App Center as part of a De
 
 ## Configure Test
 
-1. TBD
+Before we get started connecting our tests to our build process, we want to select the types of devices that we would like to test our application on.
+1. In the app navigation pane, select the **Test** option and then **Device Sets**.
 
+    ![Screenshot](media/appcenter/ac-15.png)
+
+2. Click **New device set**
+3. In the *New device set* dialog, give the set a name e.g. **Pixel Devices** and select the *Google Pixel XL* and *Google Pixel* options.
+
+    ![Screenshot](media/appcenter/ac-16.png)
+
+4. Click **New device set**
+5. On the navigation pane, select **Test runs**.
+
+    ![Screenshot](media/appcenter/ac-17.png)
+
+6. Click **Start testing your app**.
+7. In the *Select devices* wizard, choose the device configuration we previously created. Click **Next**.
+8. In *Configure*, change the test framework to **Xamarin.UITest** and click **Next**.
+
+    ![Screenshot](media/appcenter/ac-18.png)
+
+9. On the last page of the dialog, we will see a sample command similar to:
+    ```
+    appcenter test run uitest --app "{organization}/Credit-Card-Validation" --devices "{organization}/pixel-devices" --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir pathToUITestBuildDir
+    ```
+    We can invoke the command from a computer that has the appcenter-cli installed on it. The parameters for `--app-path` and `--build-dir` will need to be adjusted to the local file paths on the computer.
+
+9. Click **Done**.
 ## Configure Distribution
 
 1. In the app navigation pane, click the **Distribute** option.
@@ -179,3 +206,27 @@ The main focus of this guide is to leverage Microsoft App Center as part of a De
     ![Screenshot](media/appcenter/ac-11.png)
        
     ![Screenshot](media/appcenter/ac-12.png)
+
+## Additional Capabilities
+### **Push**
+> Note: This service is currently in preview.
+
+App Center can allow you to create push notifications for your app.
+
+### **Bug Tracker**
+You can configure App Center to connect to either VSTS or GitHub as an automatic bug tracker.
+
+1. In the App Center portal, on the navigation menu, select **Settings** and then **Services**.
+    
+    ![Screenshot](media/appcenter/ac-13.png)
+
+2. Select **Visual Studio Team Services**. You may be prompted for permissions to allow work item read / write and notifications. If so, click **Accept**.
+3. In the *Add bug tracker* dialog, select the team project you would like to use and click **Next**.
+4. Enable the **Auto create ticket** setting and provide a value for the number of crashes needed in order to create a ticket.
+5. In the *Area* field, provide the area path you would like your auto-created bugs to be placed.
+    > Note: App Center will not create the area path for you, this has to already exist in VSTS.
+6. Click **Add**.
+    
+    ![Screenshot](media/appcenter/ac-14.png)
+
+## References

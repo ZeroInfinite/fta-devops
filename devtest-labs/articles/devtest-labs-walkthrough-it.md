@@ -141,6 +141,42 @@ As you walk through these guides, consider the three personas that use a DevTest
 
     ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-16.png)
 
+8. Select **Lab settings** from the left hand menu of the **Configuration and Policies** blade.
+    * You will notice there are two options **Contributor** and **Reader**. Reader is selected by default.
+
+    > When a resource is created in DevTest Labs (Virtual Machine or Environment), it is created in a separate Resource Group. By giving your lab users Contributor access rights, you would enable them to manage those resources. By default, they can only view the resources.
+
+
+9. Select **Lab announcements** from the left hand menu of the **Configuration and Policies** blade (associated documentation [here](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-announcements)).
+
+    * Select the **Enabled** radio button to **Yes**.
+    * Enter a relevant announcement title
+    * Enter relevant text for your announcement. Be aware that you can use Markdown inside of this text area.
+    
+    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-30.png)
+
+    > Note: This may be particularly useful if you have messages that you want to communicate to your lab users about the running of the environment. For example, any known live issues, communicating changes regarding the environment.
+
+    * Navigate to the **Overview** section of your DevTest Labs resource. At the top of the Overview section, you will notice that there is a banner. Click on the banner.
+    
+    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-31.png)
+
+    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-32.png)
+
+10. Select **Internal support** from the **Configuration and policies** blade (associated documentation [here](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-internal-support-message)).
+
+    * Select the **Enabled** radio button to **Yes**.
+    * Enter relevant text for your support information. Be aware that you can use Markdown inside of this text area.
+    
+    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-33.png)
+
+    > Note: An internal support statement is intended to let you post lab information that doesn't typically change too often. For example, you can provide contact information so that a user knows how to reach internal support when they need help with troubleshooting or accessing resources in the lab. You can also provide links to internal websites or FAQs that your team can access before contacting support.
+
+    * Navigate to the overview blade of your DevTest Labs resource. Select **Internal support**.
+    * You will see your support message is now available to all users of the DevTest labs resource.
+    
+    ![Screenshot](media/devtest-labs-walkthrough-it/dtl-it-33.png)
+
 ## Setting up your Lab environment
 
 1. Navigate to **My Secrets** on your DevTest Lab blade.

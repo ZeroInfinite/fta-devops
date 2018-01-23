@@ -29,7 +29,7 @@ The main focus of this guide is to leverage Microsoft App Center as part of a De
 
 ## Code Setup
 
-1. Download the [CreditCardValidatior.Droid.Zip file](https://github.com/xamarin/test-cloud-samples/raw/master/Quickstarts/downloads/CreditCardValidator.Droid.zip). Unzip the file.
+1. Download the [CreditCardValidatior.Droid.Zip file](https://ftashared.blob.core.windows.net/demos/CreditCardValidator.Droid.zip). Unzip the file.
 
 2. Using the command line, navigate into the newly created folder. 
     * Initialise the repository using the `git init` command. 
@@ -90,6 +90,7 @@ The main focus of this guide is to leverage Microsoft App Center as part of a De
     * Automatically increment version code: Enable this switch
     * Sign builds: Enable this switch
     * Keystore file: Upload the keystore you created earlier and fill in the required parameters
+    * Keystore alias: If you followed the steps above exactly and copy / pasted the keytool generation command exactly, the keystore alias here will be *android*.
     
     ![Screenshot](media/appcenter/ac-8.png)
 
@@ -137,7 +138,10 @@ Before we get started connecting our tests to our build process, we want to sele
 3. Select the **master** branch, click **Next**.
 4. Choose the build just created and click **Next**.
 5. Click **Next** in the release notes.
-6. For **Destination** click **Next**.
+6. For **Destination**, select the group that you want to receive your build and then click **Next**.
+
+    ![Screenshot](media/appcenter/ac-19.png)
+
 7. Finally click **Distribute**.
 8. Once the app has been distributed, you should receive an email indicating a new build is available.
 9. On the navigation pane, go back to the **Build** settings.
@@ -146,7 +150,7 @@ Before we get started connecting our tests to our build process, we want to sele
 ## Analytics and Telemetry
 
 1. In Visual Studio, open the *CreditCardValidator.sln* file.
-2. Right click on the project, and select **Manage NuGet packages**.
+2. Right click on the *CreditCardValidator.Droid* project, and select **Manage NuGet packages**.
 3. Add the `Microsoft.AppCenter.Analytics`, `Microsoft.AppCenter.Crashes`, and `Microsoft.AppCenter.Distribute` packages.
 4. In the App Center portal, navigate to the **Getting Started** view of your app. Copy the GUID assigned to your application.
 
@@ -177,7 +181,7 @@ Before we get started connecting our tests to our build process, we want to sele
     ![Screenshot](media/appcenter/ac-10.png)
 
 8. Navigate to App Center and to the **Crashes** view. You should see the details of the thrown exception showing up. You can click on the exception for more details.
-9. Replace the **OnCreate** method with the following code
+9. Replace the **OnCreate** method in the same **CreditCardValidationSuccess.cs** file with the following code
     ```csharp
     protected override void OnCreate(Bundle bundle)
     {

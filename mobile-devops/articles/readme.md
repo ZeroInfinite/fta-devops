@@ -1,3 +1,8 @@
+# FastTrack for Azure
+
+See our [FastTrack for Azure landing page](https://github.com/Azure/FastTrackForAzure) for more information.
+
+
 # FastTrack for Azure - Mobile DevOps
 
 In this folder you will find a number of tutorials that relate to common activities when working with DevOps for Mobile. This includes:

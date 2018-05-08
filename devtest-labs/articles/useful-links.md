@@ -2,6 +2,8 @@
 
 If you have been through one of our DevTest Labs session, thank you! Please find below some extra documentation and articles which may be useful when moving forward with your DevTest Labs implementation.
 
+Are you just getting started with DevTest labs? Then consider reading through this [adoption guidance](https://github.com/Azure/azure-devtestlab/blob/master/Documentation/Getting%20Started%20with%20DevTest%20Labs.pdf) for more information, as you begin to plan your journey.
+
 If you have not been through our session, why not consider getting in touch with your Program Manager or lead engineer, and determining if DevTest labs is a fit for your project's aims?
 
 ## Scenarios

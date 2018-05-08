@@ -10,6 +10,7 @@ If you have not been through our session, why not consider getting in touch with
 * [Use Azure DevTest Labs for training](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-training-lab)
 
 ## DevTest Labs
+* [Azure DevTest Labs Prescriptive Adoption Guide](https://github.com/Azure/azure-devtestlab/blob/master/Documentation/Getting%20Started%20with%20DevTest%20Labs.pdf)
 * [Azure DevTest Labs Documentation](https://docs.microsoft.com/en-us/azure/devtest-lab/)
 * [DevTest Lab Concepts](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-concepts)
 * In Azure DevTest labs, you can control the creation of Virtual Machines. It is worth being aware of the [Claimable Virtual Machine](https://docs.microsoft.com/en-us/azure/devtest-lab/devtest-lab-concepts#claimable-vm) type

@@ -6,7 +6,7 @@
   * [Code Setup](#code-setup)
   * [App Center Configuration](#app-center-configuration)
   * [Configure Build](#configure-build)
-  * [Configure Test](#configure-test)
+  * [Configure 6](#configure-test)
   * [Configure Distribution](#configure-distribution)
   * [Analytics and Telemetry](#analytics-and-telemetry)
   * [Additional Capabilities](#additional-capabilities)
@@ -127,6 +127,10 @@ Login to the cli now using this command and follow the instructions from the com
     ```
 appcenter login
     ```
+
+Make sure you also have the Android SDK installed and the ANDROID_HOME environment variable set to the path of your Android SDK, otherwise this will not work.  You may have to update the Xamarin Test Cloud.
+
+You also have to have a APK version of your mobile application without mono and built in release mode. In order to generate the .apk for the Relesase folder, you should right click on solution, choose Archive all, choose Distribute and Ad hoc.  Add in the androidsigning.keystore file (located in your Java/jdk_version#/bin) to make it signed and use the same passwords as above and the alias android.  
 
 To run the tests in App Center, run the following command from the directory that contains the NuGet packages directory. 
 The sample command will similar to below.  Make sure that you add the pathToFile.apk and pathToUITestBuildDir. 

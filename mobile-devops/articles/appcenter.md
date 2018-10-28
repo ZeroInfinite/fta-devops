@@ -119,22 +119,35 @@ Before we get started connecting our tests to our build process, we want to sele
 
     ![Screenshot](media/appcenter/ac-18.png)
 
-9. On the last page of the dialog, we will see a sample command similar to:
+9. On the last page of the dialog, we will see Prerequisites to run Xamarin UI tests.  If you do not have the app-center CLI package, make sure you have NodeJS installed then run the following:
+    ```
+npm install -g appcenter-cli
+    ```
+Login to the cli now using this command and follow the instructions from the command prompt/browser55:
+    ```
+appcenter login
+    ```
+
+To run the tests in App Center, run the following command from the directory that contains the NuGet packages directory. 
+The sample command will similar to below.  Make sure that you add the pathToFile.apk and pathToUITestBuildDir. 
     ```
     appcenter test run uitest --app "{organization}/Credit-Card-Validation" --devices "{organization}/pixel-devices" --app-path pathToFile.apk  --test-series "master" --locale "en_US" --build-dir pathToUITestBuildDir
     ```
     We can invoke the command from a computer that has the appcenter-cli installed on it. The parameters for `--app-path` and `--build-dir` will need to be adjusted to the local file paths on the computer.
-
+    
+Here is an example of a working command using relative paths run from the C:\CreditCardValidator.Droid folder which containes the packages folder (run this from the project root folder basically): 
+    ```
+appcenter test run uitest --app "crtenn-creditcardvalidator/Credit-Card-Validation" --devices deb60f14 --app-path "Credit
+CardValidator.Droid\bin\Release\com.xamarin.example.creditcardvalidator.apk" --test-series "master" --locale "en_US" --build-dir "CreditCardValidator.Droid.UITests\bin\Release" --uitest-tools-dir "packages\Xamarin.UITest.2.2.6\tools"
+    ```
+    
 9. Click **Done**.
 ## Configure Distribution
 
 1. In the app navigation pane, click the **Distribute** option.
 
     ![Screenshot](media/appcenter/ac-6.png)
-2. In the distribute view, select **Distribute new release**, select **Choose build from branch**.
-
-    ![Screenshot](media/appcenter/ac-7.png)
-
+2. In the distribute view, select **New release**, select **Distribuite an existing build** (found on the bottom of the right menu pop-up in blue text).
 3. Select the **master** branch, click **Next**.
 4. Choose the build just created and click **Next**.
 5. Click **Next** in the release notes.
@@ -180,7 +193,7 @@ Before we get started connecting our tests to our build process, we want to sele
     
     ![Screenshot](media/appcenter/ac-10.png)
 
-8. Navigate to App Center and to the **Crashes** view. You should see the details of the thrown exception showing up. You can click on the exception for more details.
+8. Navigate to App Center and to the **Diagnostics** section and **Crashes** view. You should see the details of the thrown exception showing up. You can click on the exception for more details.
 9. Replace the **OnCreate** method in the same **CreditCardValidationSuccess.cs** file with the following code
     ```csharp
     protected override void OnCreate(Bundle bundle)
